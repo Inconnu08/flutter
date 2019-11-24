@@ -3191,6 +3191,7 @@ void main() {
 //    properties.add(DiagnosticsProperty<TextStyle>('style', style, defaultValue: null));
 //    properties.add(DiagnosticsProperty<bool>('autofocus', autofocus, defaultValue: false));
 //    properties.add(DiagnosticsProperty<bool>('showCursor', showCursor, defaultValue: false));
+//    properties.add(IntProperty('minLines', minLines, defaultValue: null));
 //    properties.add(IntProperty('maxLines', maxLines, defaultValue: null));
 //    properties.add(EnumProperty<TextAlign>('textAlign', textAlign, defaultValue: null));
 //    properties.add(EnumProperty<TextDirection>('textDirection', textDirection, defaultValue: null));
@@ -3207,6 +3208,7 @@ void main() {
       textDirection: TextDirection.ltr,
       autofocus: true,
       showCursor: true,
+      minLines: 2,
       maxLines: 10,
       cursorWidth: 1.0,
       cursorRadius: Radius.zero,
@@ -3224,6 +3226,7 @@ void main() {
       'style: TextStyle(inherit: true, color: Color(0xff00ff00))',
       'autofocus: true',
       'showCursor: true',
+      'minLines: 2',
       'maxLines: 10',
       'textAlign: end',
       'textDirection: ltr',
