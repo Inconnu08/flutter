@@ -1140,6 +1140,25 @@ void main() {
     expect(inputBox.hitTest(BoxHitTestResult(), position: inputBox.globalToLocal(newFourthPos)), isFalse);
   });
 
+  testWidgets('minlines cannot be larger than maxLines', (WidgetTester tester) async {
+    try {
+      await tester.pumpWidget(
+        overlay(
+          child: Container(
+            width: 300.0,
+            child: SelectableText(
+              'abcd',
+              minLines: 4,
+              maxLines: 3,
+            ),
+          ),
+        ),
+      );
+    } on AssertionError catch (e) {
+      expect(e.toString(), contains('(maxLines == null) || (minLines == null) || (maxLines >'));
+    }
+  });
+
   testWidgets('Can align to center', (WidgetTester tester) async {
     await tester.pumpWidget(
       overlay(
