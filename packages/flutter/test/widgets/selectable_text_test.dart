@@ -1140,7 +1140,7 @@ void main() {
     expect(inputBox.hitTest(BoxHitTestResult(), position: inputBox.globalToLocal(newFourthPos)), isFalse);
   });
 
-  testWidgets('minlines cannot be larger than maxLines', (WidgetTester tester) async {
+  testWidgets('minLines cannot be greater than maxLines', (WidgetTester tester) async {
     try {
       await tester.pumpWidget(
         overlay(
@@ -1155,7 +1155,7 @@ void main() {
         ),
       );
     } on AssertionError catch (e) {
-      expect(e.toString(), contains('(maxLines == null) || (minLines == null) || (maxLines >'));
+      expect(e.toString(), contains("minLines can't be greater than maxLines"));
     }
   });
 
