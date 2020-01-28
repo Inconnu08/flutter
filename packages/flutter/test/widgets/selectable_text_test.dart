@@ -180,12 +180,14 @@ void main() {
   Widget selectableTextBuilder({
     String text = '',
     int maxLines = 1,
+    int minLines,
   }) {
     return boilerplate(
       child: SelectableText(
         text,
         style: const TextStyle(color: Colors.black, fontSize: 34.0),
         maxLines: maxLines,
+        minLines: minLines
       ),
     );
   }
@@ -1157,6 +1159,20 @@ void main() {
     } on AssertionError catch (e) {
       expect(e.toString(), contains("minLines can't be greater than maxLines"));
     }
+  });
+
+  testWidgets('Selectable height with minLine', (WidgetTester tester) async {
+    await tester.pumpWidget(selectableTextBuilder());
+
+    RenderBox findTextBox() => tester.renderObject(find.byType(SelectableText));
+
+    final RenderBox textBox = findTextBox();
+    final Size emptyInputSize = textBox.size;
+
+    // Even if the text is a one liner, minimum height of SelectableText will determined by minLines
+    await tester.pumpWidget(selectableTextBuilder(text: 'No wrapping here.', minLines: 2, maxLines: 3));
+    expect(findTextBox(), equals(textBox));
+    expect(textBox.size.height, emptyInputSize.height * 2);
   });
 
   testWidgets('Can align to center', (WidgetTester tester) async {
